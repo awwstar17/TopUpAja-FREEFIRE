@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopUpAja - Top Up Game Tercepat & Termurah</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .saldo-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95em;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .promo-timer {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+        }
+
+        /* Game Categories */
+        .game-tabs {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .game-tab {
+            background: #f5f5f5;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .game-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .game-tab:not(.active):hover {
+            background: #e0e0e0;
+            border-color: #667eea;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .left-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #667eea;
+            font-weight: 800;
+        }
+
+        /* Diamond Grid */
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .diamond-card {
+            background: linear-gradient(145deg, #f9f9f9, #ffffff);
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diamond-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .diamond-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .diamond-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .diamond-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .diamond-amount {
+            font-size: 1.8em;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .diamond-label {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .diamond-price {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .diamond-card.selected .diamond-price {
+            color: white;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 700;
+        }
+
+        .badge.bonus {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .badge.popular {
+            background: #51cf66;
+        }
+
+        /* Input Section */
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Payment Methods */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .payment-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .payment-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .payment-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .payment-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .payment-balance {
+            font-size: 0.75em;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .total-row {
+            font-size: 1.3em;
+            color: #667eea;
+        }
+
+        .voucher-section {
+            margin: 20px 0;
+        }
+
+        .voucher-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .voucher-input input {
+            flex: 1;
+        }
+
+        .apply-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #5568d3;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .pay-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .pay-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* CS Button */
+        .cs-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .cs-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 5px 30px rgba(37, 211, 102, 0.8); }
+        }
+
+        /* Success Page */
+        .success-page {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-title {
+            font-size: 2.5em;
+            color: #51cf66;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .order-details {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        /* Fake Notifications */
+        .fake-notif {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 998;
+            animation: slideInRight 0.5s ease;
+            max-width: 300px;
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .notif-text {
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Recent Activity */
+        .activity-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Stock Badge */
+        .stock-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 5px;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Captcha */
+        .captcha-box {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .captcha-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .diamond-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            display: none;
+            animation: toastIn 0.5s ease;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* History Section */
+        .history-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .history-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .history-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .status-badge {
+            background: #51cf66;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" id="logo">⚡ TopUpAja</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#cara">Cara Order</a></li>
+                <li><a href="#promo">Promo</a></li>
+                <li><a href="#akun">Akun</a></li>
+            </ul>
+            <div class="saldo-display">💰 Saldo: Rp <span id="navSaldo">0</span></div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="hero">
+        <h1>🎮 Top Up Game Tercepat!</h1>
+        <p>Proses otomatis 24/7 • Harga termurah • Aman & terpercaya</p>
+        <div class="activity-box">
+            🔥 <span id="viewerCount">0</span> orang sedang melihat halaman ini
+        </div>
+        <div class="promo-timer">
+            ⏰ Promo berakhir dalam: <span id="promoTimer">00:00:00</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Game Tabs -->
+        <div class="game-tabs">
+            <div class="game-tab active">🔥 Free Fire</div>
+            <div class="game-tab">⚔️ Mobile Legends</div>
+            <div class="game-tab">🎯 PUBG Mobile</div>
+            <div class="game-tab">✨ Genshin Impact</div>
+            <div class="game-tab">🎮 Valorant</div>
+            <div class="game-tab">🏆 Clash of Clans</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Left Section -->
+            <div class="left-section">
+                <h2 class="section-title">💎 Pilih Nominal Diamond</h2>
+                
+                <div class="diamond-grid" id="diamondGrid">
+                    <!-- Diamond cards will be generated by JS -->
+                </div>
+
+                <div class="input-section">
+                    <label class="input-label">🆔 Masukkan ID Player</label>
+                    <input type="text" id="playerId" placeholder="Contoh: 1234567890" maxlength="12">
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">💳 Pilih Metode Pembayaran</h2>
+                
+                <div class="payment-grid" id="paymentGrid">
+                    <!-- Payment cards will be generated by JS -->
+                </div>
+
+                <div class="voucher-section">
+                    <label class="input-label">🎟️ Punya Kode Voucher?</label>
+                    <div class="voucher-input">
+                        <input type="text" id="voucherCode" placeholder="Masukkan kode voucher">
+                        <button class="apply-btn" onclick="applyVoucher()">Pakai</button>
+                    </div>
+                </div>
+
+                <div class="captcha-box">
+                    <input type="checkbox" class="captcha-checkbox" id="captchaCheck">
+                    <label for="captchaCheck">Saya bukan robot</label>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <div class="order-summary">
+                    <h2 class="section-title">📋 Ringkasan Pesanan</h2>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Produk:</span>
+                        <span class="summary-value" id="summaryProduct">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">ID Player:</span>
+                        <span class="summary-value" id="summaryId">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Metode:</span>
+                        <span class="summary-value" id="summaryPayment">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Harga:</span>
+                        <span class="summary-value" id="summaryPrice">Rp 0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span class="summary-label">Cashback:</span>
+                        <span class="summary-value" style="color: #51cf66;">+ Rp <span id="summaryCashback">0</span></span>
+                    </div>
+                    
+                    <div class="summary-row total-row">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value" id="summaryTotal">Rp 0</span>
+                    </div>
+
+                    <button class="pay-btn" id="payBtn" onclick="processPayment()" disabled>
+                        💳 Bayar Sekarang
+                    </button>
+
+                    <div style="margin-top: 20px; text-align: center; font-size: 0.85em; color: #888;">
+                        🎁 Dapat <strong style="color: #667eea;">50 Poin</strong> dari transaksi ini!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Page (Hidden) -->
+        <div class="success-page" id="successPage">
+            <div class="success-icon">✅</div>
+            <h1 class="success-title">Pembayaran Berhasil!</h1>
+            <p style="font-size: 1.2em; color: #666; margin-bottom: 30px;">
+                Terima kasih! Diamond akan masuk dalam 1-5 menit
+            </p>
+
+            <div class="order-details">
+                <h3 style="margin-bottom: 20px; color: #667eea;">Detail Pesanan</h3>
+                <div class="detail-row">
+                    <strong>Nomor Pesanan:</strong>
+                    <span id="orderNumber">-</span>
+                </div>
+                <div class="detail-row">
+                    <strong>ID Player:</strong>
+                    <span id="successPlayerId">-</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Produk:</strong>
+                    <span id="successProduct">-</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Harga:</strong>
+                    <span id="successPrice">-</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Metode Pembayaran:</strong>
+                    <span id="successPayment">-</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Status:</strong>
+                    <span class="status-badge">✅ Berhasil</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Waktu:</strong>
+                    <span id="successTime">-</span>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="backToHome()">🏠 Kembali ke Beranda</button>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 12px; border-left: 4px solid #667eea;">
+                <strong>💰 Cashback Rp <span id="cashbackAmount">0</span> telah ditambahkan ke saldo Anda!</strong>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="history-section" id="historySection">
+            <h2 class="section-title">📜 Riwayat Transaksi</h2>
+            <div id="historyList">
+                <p style="text-align: center; color: #888;">Belum ada transaksi</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>⚡ TopUpAja</h3>
+                <p>Platform top up game tercepat dan termurah di Indonesia</p>
+            </div>
+            <div class="footer-section">
+                <h3>Produk</h3>
+                <a href="#">Free Fire</a>
+                <a href="#">Mobile Legends</a>
+                <a href="#">PUBG Mobile</a>
+                <a href="#">Genshin Impact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Bantuan</h3>
+                <a href="#">Cara Order</a>
+                <a href="#">FAQ</a>
+                <a href="#">Hubungi Kami</a>
+                <a href="#">Syarat & Ketentuan</a>
+            </div>
+            <div class="footer-section">
+                <h3>Ikuti Kami</h3>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📷 Instagram</a>
+                <a href="#">🐦 Twitter</a>
+                <a href="#">📱 TikTok</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 TopUpAja. All rights reserved. | Made with ❤️ in Indonesia
+        </div>
+    </footer>
+
+    <!-- CS Button -->
+    <div class="cs-button" onclick="openCS()">
+        <span style="font-size: 2em;">💬</span>
+    </div>
+
+    <!-- Fake Notification -->
+    <div class="fake-notif" id="fakeNotif">
+        <div class="notif-text">
+            <strong id="notifName">Budi</strong> baru saja top up <strong id="notifAmount">1000</strong> diamond!
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Memproses Pembayaran...</h3>
+            <p style="color: #666; margin-top: 10px;">Mohon tunggu sebentar</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Diamond packages
+        const diamonds = [
+            { amount: 50, price: 7500, badge: 'popular', label: 'Terpopuler' },
+            { amount: 70, price: 10000, badge: null },
+            { amount: 140, price: 20000, badge: 'bonus', label: '+10 Bonus' },
+            { amount: 355, price: 50000, badge: null },
+            { amount: 720, price: 100000, badge: 'popular', label: 'Best Seller' },
+            { amount: 1450, price: 200000, badge: 'bonus', label: '+50 Bonus' },
+            { amount: 2180, price: 300000, badge: null },
+            { amount: 3640, price: 500000, badge: 'bonus', label: '+150 Bonus' },
+            { amount: 7290, price: 1000000, badge: 'bonus', label: 'MEGA BONUS' }
+        ];
+
+        // Payment methods
+        const payments = [
+            { id: 'saldo', name: 'Saldo TopUpAja', icon: '💰', enabled: true, balance: 10492190 },
+            { id: 'alfamart', name: 'Alfamart', icon: '🏪', enabled: false },
+            { id: 'indomaret', name: 'Indomaret', icon: '🏬', enabled: false },
+            { id: 'bank', name: 'Transfer Bank', icon: '🏦', enabled: false },
+            { id: 'dana', name: 'DANA', icon: '💵', enabled: false },
+            { id: 'gopay', name: 'GoPay', icon: '💳', enabled: false },
+            { id: 'ovo', name: 'OVO', icon: '💰', enabled: false },
+            { id: 'qris', name: 'QRIS', icon: '📱', enabled: false }
+        ];
+
+        // State
+        let selectedDiamond = null;
+        let selectedPayment = null;
+        let currentBalance = 10492190;
+        let transactions = [];
+        let clickCount = 0;
+
+        // Initialize storage
+        async function initStorage() {
+            try {
+                const result = await window.storage.get('topupaja_balance');
+                if (result && result.value) {
+                    currentBalance = parseInt(result.value);
+                }
+            } catch (e) {
+                currentBalance = 10492190;
+                await saveBalance();
+            }
+
+            try {
+                const histResult = await window.storage.get('topupaja_transactions');
+                if (histResult && histResult.value) {
+                    transactions = JSON.parse(histResult.value);
+                    displayHistory();
+                }
+            } catch (e) {
+                transactions = [];
+            }
+
+            updateBalanceDisplay();
+        }
+
+        // Save balance
+        async function saveBalance() {
+            try {
+                await window.storage.set('topupaja_balance', currentBalance.toString());
+            } catch (e) {
+                console.error('Failed to save balance');
+            }
+        }
+
+        // Save transactions
+        async function saveTransactions() {
+            try {
+                await window.storage.set('topupaja_transactions', JSON.stringify(transactions));
+            } catch (e) {
+                console.error('Failed to save transactions');
+            }
+        }
+
+        // Update balance display
+        function updateBalanceDisplay() {
+            document.getElementById('navSaldo').textContent = formatRupiah(currentBalance);
+            const saldoPayment = document.querySelector('[data-payment="saldo"] .payment-balance');
+            if (saldoPayment) {
+                saldoPayment.textContent = 'Rp ' + formatRupiah(currentBalance);
+            }
+        }
+
+        // Format rupiah
+        function formatRupiah(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Generate diamond cards
+        function generateDiamonds() {
+            const grid = document.getElementById('diamondGrid');
+            grid.innerHTML = '';
+
+            diamonds.forEach((diamond, index) => {
+                const stock = Math.floor(Math.random() * 20) + 10;
+                const card = document.createElement('div');
+                card.className = 'diamond-card';
+                card.onclick = () => selectDiamond(index);
+                
+                let badgeHTML = '';
+                if (diamond.badge) {
+                    badgeHTML = `<span class="badge ${diamond.badge}">${diamond.label}</span>`;
+                }
+
+                card.innerHTML = `
+                    ${badgeHTML}
+                    <div class="diamond-amount">${diamond.amount}</div>
+                    <div class="diamond-label">💎 Diamond</div>
+                    <div class="diamond-price">Rp ${formatRupiah(diamond.price)}</div>
+                    <div class="stock-badge">📦 Stok: ${stock}</div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Generate payment methods
+        function generatePayments() {
+            const grid = document.getElementById('paymentGrid');
+            grid.innerHTML = '';
+
+            payments.forEach((payment, index) => {
+                const card = document.createElement('div');
+                card.className = 'payment-card';
+                if (!payment.enabled) card.classList.add('disabled');
+                card.setAttribute('data-payment', payment.id);
+                card.onclick = () => selectPayment(index);
+
+                let balanceHTML = '';
+                if (payment.id === 'saldo') {
+                    balanceHTML = `<div class="payment-balance">Rp ${formatRupiah(payment.balance)}</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="payment-icon">${payment.icon}</div>
+                    <div class="payment-name">${payment.name}</div>
+                    ${balanceHTML}
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Select diamond
+        function selectDiamond(index) {
+            document.querySelectorAll('.diamond-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.diamond-card')[index].classList.add('selected');
+            selectedDiamond = diamonds[index];
+            updateSummary();
+        }
+
+        // Select payment
+        function selectPayment(index) {
+            if (!payments[index].enabled) {
+                showToast('❌ Metode pembayaran ini belum tersedia');
+                return;
+            }
+
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.payment-card')[index].classList.add('selected');
+            selectedPayment = payments[index];
+            updateSummary();
+        }
+
+        // Update summary
+        function updateSummary() {
+            const playerId = document.getElementById('playerId').value;
+            const captcha = document.getElementById('captchaCheck').checked;
+
+            if (selectedDiamond) {
+                document.getElementById('summaryProduct').textContent = `${selectedDiamond.amount} Diamond`;
+                document.getElementById('summaryPrice').textContent = `Rp ${formatRupiah(selectedDiamond.price)}`;
+                document.getElementById('summaryTotal').textContent = `Rp ${formatRupiah(selectedDiamond.price)}`;
+                
+                const cashback = Math.floor(selectedDiamond.price * 0.05);
+                document.getElementById('summaryCashback').textContent = formatRupiah(cashback);
+            }
+
+            if (playerId) {
+                document.getElementById('summaryId').textContent = playerId;
+            }
+
+            if (selectedPayment) {
+                document.getElementById('summaryPayment').textContent = selectedPayment.name;
+            }
+
+            // Enable pay button
+            const payBtn = document.getElementById('payBtn');
+            if (selectedDiamond && playerId && selectedPayment && captcha) {
+                payBtn.disabled = false;
+            } else {
+                payBtn.disabled = true;
+            }
+        }
+
+        // Apply voucher
+        function applyVoucher() {
+            const code = document.getElementById('voucherCode').value;
+            if (code) {
+                showToast('❌ Kode voucher tidak valid atau sudah tidak berlaku');
+            } else {
+                showToast('⚠️ Masukkan kode voucher terlebih dahulu');
+            }
+        }
+
+        // Process payment
+        async function processPayment() {
+            const playerId = document.getElementById('playerId').value;
+
+            if (!selectedDiamond || !selectedPayment || !playerId) {
+                showToast('❌ Lengkapi semua data terlebih dahulu');
+                return;
+            }
+
+            // Check if payment is not saldo
+            if (selectedPayment.id !== 'saldo') {
+                showToast('❌ Metode pembayaran ini belum tersedia, silakan gunakan Saldo TopUpAja');
+                return;
+            }
+
+            // Check balance
+            if (currentBalance < selectedDiamond.price) {
+                showToast('❌ Saldo tidak mencukupi!');
+                return;
+            }
+
+            // Show loading
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.style.display = 'flex';
+
+            // Animate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 10;
+                document.getElementById('progressFill').style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                }
+            }, 200);
+
+            // Simulate processing
+            setTimeout(async () => {
+                // Deduct balance
+                currentBalance -= selectedDiamond.price;
+                
+                // Add cashback
+                const cashback = Math.floor(selectedDiamond.price * 0.05);
+                currentBalance += cashback;
+
+                await saveBalance();
+                updateBalanceDisplay();
+
+                // Generate order number
+                const orderNumber = 'TUA' + Date.now() + Math.floor(Math.random() * 1000);
+
+                // Save transaction
+                const transaction = {
+                    orderNumber,
+                    playerId,
+                    product: `${selectedDiamond.amount} Diamond`,
+                    price: selectedDiamond.price,
+                    payment: selectedPayment.name,
+                    cashback,
+                    date: new Date().toLocaleString('id-ID')
+                };
+
+                transactions.unshift(transaction);
+                if (transactions.length > 10) transactions.pop();
+                await saveTransactions();
+
+                // Hide loading
+                overlay.style.display = 'none';
+
+                // Show success page
+                showSuccessPage(transaction);
+
+                // Show confetti
+                createConfetti();
+
+                // Reset form
+                resetForm();
+
+            }, 2500);
+        }
+
+        // Show success page
+        function showSuccessPage(transaction) {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('historySection').style.display = 'none';
+            document.getElementById('successPage').style.display = 'block';
+
+            document.getElementById('orderNumber').textContent = transaction.orderNumber;
+            document.getElementById('successPlayerId').textContent = transaction.playerId;
+            document.getElementById('successProduct').textContent = transaction.product;
+            document.getElementById('successPrice').textContent = 'Rp ' + formatRupiah(transaction.price);
+            document.getElementById('successPayment').textContent = transaction.payment;
+            document.getElementById('successTime').textContent = transaction.date;
+            document.getElementById('cashbackAmount').textContent = formatRupiah(transaction.cashback);
+
+            window.scrollTo(0, 0);
+        }
+
+        // Back to home
+        function backToHome() {
+            document.getElementById('mainContent').style.display = 'grid';
+            document.getElementById('historySection').style.display = 'block';
+            document.getElementById('successPage').style.display = 'none';
+            displayHistory();
+            window.scrollTo(0, 0);
+        }
+
+        // Reset form
+        function resetForm() {
+            selectedDiamond = null;
+            selectedPayment = null;
+            document.getElementById('playerId').value = '';
+            document.getElementById('voucherCode').value = '';
+            document.getElementById('captchaCheck').checked = false;
+            document.querySelectorAll('.diamond-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('summaryProduct').textContent = '-';
+            document.getElementById('summaryId').textContent = '-';
+            document.getElementById('summaryPayment').textContent = '-';
+            document.getElementById('summaryPrice').textContent = 'Rp 0';
+            document.getElementById('summaryCashback').textContent = '0';
+            document.getElementById('summaryTotal').textContent = 'Rp 0';
+            document.getElementById('payBtn').disabled = true;
+        }
+
+        // Display history
+        function displayHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (transactions.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #888;">Belum ada transaksi</p>';
+                return;
+            }
+
+            historyList.innerHTML = '';
+            transactions.forEach(trans => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <div class="history-header">
+                        <span>${trans.orderNumber}</span>
+                        <span class="status-badge">✅ Berhasil</span>
+                    </div>
+                    <div class="history-details">
+                        <div>📦 ${trans.product}</div>
+                        <div>🆔 ${trans.playerId}</div>
+                        <div>💰 Rp ${formatRupiah(trans.price)} (Cashback: Rp ${formatRupiah(trans.cashback)})</div>
+                        <div>📅 ${trans.date}</div>
+                    </div>
+                `;
+                historyList.appendChild(item);
+            });
+        }
+
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Open CS
+        function openCS() {
+            showToast('💬 Untuk bantuan, hubungi CS kami di WhatsApp: 0812-3456-7890');
+        }
+
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#ffd700', '#ff6b6b', '#51cf66'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.zIndex = '99999';
+                    confetti.style.pointerEvents = 'none';
+                    document.body.appendChild(confetti);
+
+                    const animation = confetti.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 2000 + 2000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+
+                    animation.onfinish = () => confetti.remove();
+                }, i * 30);
+            }
+        }
+
+        // Promo timer
+        function startPromoTimer() {
+            let hours = 2, minutes = 45, seconds = 12;
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                }
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                }
+                if (hours < 0) {
+                    hours = 2;
+                    minutes = 45;
+                    seconds = 12;
+                }
+
+                const timer = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                document.getElementById('promoTimer').textContent = timer;
+            }, 1000);
+        }
+
+        // Viewer count animation
+        function animateViewerCount() {
+            let count = Math.floor(Math.random() * 50) + 20;
+            document.getElementById('viewerCount').textContent = count;
+
+            setInterval(() => {
+                const change = Math.floor(Math.random() * 5) - 2;
+                count = Math.max(15, Math.min(100, count + change));
+                document.getElementById('viewerCount').textContent = count;
+            }, 5000);
+        }
+
+        // Fake notifications
+        function showFakeNotifs() {
+            const names = ['Budi', 'Ani', 'Joko', 'Siti', 'Andi', 'Rina', 'Doni', 'Maya'];
+            const amounts = [1000, 2180, 720, 355, 3640, 1450];
+
+            setInterval(() => {
+                const name = names[Math.floor(Math.random() * names.length)];
+                const amount = amounts[Math.floor(Math.random() * amounts.length)];
+
+                document.getElementById('notifName').textContent = name;
+                document.getElementById('notifAmount').textContent = amount;
+
+                const notif = document.getElementById('fakeNotif');
+                notif.style.display = 'block';
+
+                setTimeout(() => {
+                    notif.style.display = 'none';
+                }, 4000);
+            }, 15000);
+        }
+
+        // Logo easter egg
+        document.getElementById('logo').addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 10) {
+                document.body.style.filter = 'invert(1) hue-rotate(180deg)';
+                showToast('🎨 Dark mode activated!');
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                    clickCount = 0;
+                }, 5000);
+            }
+        });
+
+        // Konami code easter egg
+        let konamiCode = [];
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            if (konamiCode.length > konamiPattern.length) {
+                konamiCode.shift();
+            }
+
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiPattern)) {
+                currentBalance += 1000000;
+                saveBalance();
+                updateBalanceDisplay();
+                showToast('🎉 CHEAT ACTIVATED! +Rp 1.000.000');
+                createConfetti();
+                konamiCode = [];
+            }
+        });
+
+        // Event listeners
+        document.getElementById('playerId').addEventListener('input', updateSummary);
+        document.getElementById('captchaCheck').addEventListener('change', updateSummary);
+
+        // Initialize
+        window.addEventListener('load', async () => {
+            await initStorage();
+            generateDiamonds();
+            generatePayments();
+            startPromoTimer();
+            animateViewerCount();
+            showFakeNotifs();
+        });
+    </script>
+</body>
+</html>
+                
